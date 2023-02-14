@@ -36,35 +36,35 @@ instance.interceptors.request.use(async config => {
         return Promise.reject(error);
     }
 )
-
-instance.interceptors.response.use(response => response,
-    async error => {
-        const originalRequest = error.config;
-        const status = error.response?.status;
-
-        if (status === 401 && !originalRequest.isRetry) {
-            originalRequest.isRetry = true;
-            console.log('error.response.status', status)
-            try {
-                // take refresh_token from storage and send it to server to get new access_token and refresh_token pair and store it in storage again
-                // and send original request again with new access_token in headers and return response from server to original request (originalRequest)
-                const token = await AsyncStorage.getItem('@refresh_token')
-                const res = await axios.get(`${BASE_URL}/tokens/refresh/${token}`)
-                console.log('refreshToken res', res)
-                storeAccess_token(res.data.access_token)
-                storeRefresh_token(res.data.refresh_token)
-                axios.defaults.headers.common['COLLECTORACCESSTOKEN'] = res.data.access_token;
-                originalRequest.headers['COLLECTORACCESSTOKEN'] = res.data.access_token;
-                return axios(originalRequest);
-            } catch (e) {
-                console.log('refreshToken request - error', e)
-            }
-        }
-
-        if (error.response.status === 503) return
-
-        return Promise.reject(error.response.data);
-    });
+//
+// instance.interceptors.response.use(response => response,
+//     async error => {
+//         const originalRequest = error.config;
+//         const status = error.response?.status;
+//
+//         if (status === 401 && !originalRequest.isRetry) {
+//             originalRequest.isRetry = true;
+//             console.log('error.response.status', status)
+//             try {
+//                 // take refresh_token from storage and send it to server to get new access_token and refresh_token pair and store it in storage again
+//                 // and send original request again with new access_token in headers and return response from server to original request (originalRequest)
+//                 const token = await AsyncStorage.getItem('@refresh_token')
+//                 const res = await axios.get(`${BASE_URL}/tokens/refresh/${token}`)
+//                 console.log('refreshToken res', res)
+//                 storeAccess_token(res.data.access_token)
+//                 storeRefresh_token(res.data.refresh_token)
+//                 axios.defaults.headers.common['COLLECTORACCESSTOKEN'] = res.data.access_token;
+//                 originalRequest.headers['COLLECTORACCESSTOKEN'] = res.data.access_token;
+//                 return axios(originalRequest);
+//             } catch (e) {
+//                 console.log('refreshToken request - error', e)
+//             }
+//         }
+//
+//         if (error.response.status === 503) return
+//
+//         return Promise.reject(error.response.data);
+//     });
 
 
 export const authAPI = {

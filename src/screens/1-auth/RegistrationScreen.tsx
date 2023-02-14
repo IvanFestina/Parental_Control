@@ -1,35 +1,93 @@
 import {SafeAreaView} from "react-native-safe-area-context";
-import {StatusBar, StyleSheet, Text, View} from "react-native";
-import {COLORS} from "../../const/GlobalStyles";
+import {
+    Keyboard,
+    KeyboardAvoidingView,
+    StatusBar,
+    StyleSheet,
+    Text, TouchableWithoutFeedback,
+    View
+} from "react-native";
+import {COLORS, modelStyles} from "../../const/GlobalStyles";
 import {useAppNavigation} from "../../typesNavigation";
 import {useAppDispatch, useAppSelector} from "../../utils/hooks_and_functions";
-import {HEIGHT, WIDTH} from "../../const/Layout";
-import {Input} from "../../components/ui/Input";
+import {HEIGHT, SPACING, WIDTH} from "../../const/Layout";
+import {InputForm} from "../../components/ui/InputForm";
 import {Button} from "../../components/ui/Button";
+import {zodResolver} from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import {SubmitHandler, useForm} from "react-hook-form";
+import {AnimatedBackButton} from "../../components/AnimatedBackButton";
+import {TextNavigation} from "../../components/ui/TextNavigation";
+
+const schema = z.object({
+    login: z.string().min(3, {message: 'Необходимо 3 и более символов'}).max(25, {message: 'Не больше 25 символов'}).email(),
+    password: z.string().min(6, {message: 'Required'})
+});
+
+type RegistrationFormType = {
+    email: string
+    password: string
+    passwordRepeat: string
+}
 
 export const RegistrationScreen = () => {
+
+    const {
+        control,
+        handleSubmit,
+        setValue,
+        formState: {errors},
+    } = useForm<RegistrationFormType>({
+        mode: "onBlur",
+        resolver: zodResolver(schema),
+    });
 
     const navigation = useAppNavigation()
     const dispatch = useAppDispatch()
     const isLoading = useAppSelector(state => state.app.isLoading)
-    const handleSubmit = () => {
 
+    const onSubmit: SubmitHandler<RegistrationFormType> = (data) => {
+        console.log(data);
+    };
+    const toLoginHandle = () => {
+        navigation.navigate('Login')
     }
 
-    return(
+    return (
         <SafeAreaView style={s.container}>
-            <View style={s.backButton}></View>
-            <StatusBar backgroundColor={COLORS.mainContrast} />
-            <View style={s.overContainer}>
-                <Text>Войти</Text>
-                <Input value={} onChange={} />
-                <Input value={} onChange={} />
-                <Text>Забыли пароль</Text>
-            </View>
-            <View>
-                <Button title={} />
-                <Text>У меня еще нет аккаунта зарегистрироваться</Text>
-            </View>
+            <StatusBar backgroundColor={COLORS.mainContrast}/>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+
+                <View style={s.overContainer}>
+                    <AnimatedBackButton/>
+                    {/*Форма*/}
+                    <KeyboardAvoidingView style={s.formBlock}>
+                        <Text style={modelStyles.titleAuth}>Зарегистрироваться</Text>
+                        <InputForm name={'email'} control={control} label={'email'}
+                                   errors={errors} placeholder={'Ваша почта'}/>
+                        <InputForm name={'password'} control={control} label={'Пароль'}
+                                   errors={errors} placeholder={'Password'}/>
+                        <InputForm name={'passwordRepeat'} control={control}
+                                   label={'Confirm Password'} errors={errors}
+                                   placeholder={'Повторите пароль'}/>
+                    </KeyboardAvoidingView>
+                    <View style={s.submitBlock}>
+
+                        <Button title={'Войти'}
+                                onPress={handleSubmit(onSubmit)}/>
+
+                        <View style={{alignItems: 'center', justifyContent: 'center',}}>
+
+                            <Text style={modelStyles.greyAuthSmallText}>
+                                У меня уже есть аккаунт
+                                <TextNavigation onPress={toLoginHandle}>
+                                    Аккаунт
+                                </TextNavigation>
+                            </Text>
+                        </View>
+                    </View>
+                </View>
+            </TouchableWithoutFeedback>
 
         </SafeAreaView>
     )
@@ -41,10 +99,21 @@ const s = StyleSheet.create({
         justifyContent: 'flex-end'
     },
     overContainer: {
+        justifyContent: 'space-evenly',
         borderTopLeftRadius: 16,
         borderTopRightRadius: 16,
-        height: HEIGHT / 1.2,
+        height: HEIGHT / 1.15,
         width: WIDTH,
-        backgroundColor: COLORS.white
-    }
+        backgroundColor: COLORS.white,
+        zIndex: 100
+    },
+    formBlock: {
+        paddingHorizontal: SPACING * 1.5,
+        gap: SPACING * 2
+    },
+    submitBlock: {
+        paddingHorizontal: SPACING,
+        justifyContent: "center",
+        alignItems: 'stretch'
+    },
 })

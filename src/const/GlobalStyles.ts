@@ -16,6 +16,48 @@ export const COLORS = {
     mainBackground: '#F5F5F5'
 }
 
+export const rareStyles = StyleSheet.create({
+    label: {
+        fontFamily: 'Inter400',
+        fontSize: 14,
+        lineHeight: 17,
+        color: COLORS.textGrey
+    },
+    inputText: {
+        fontFamily: 'Inter600',
+        fontSize: 16,
+        lineHeight: 20,
+        color: COLORS.mainBlack
+    }
+})
+
+export const modelStyles = StyleSheet.create({
+    titleAuth: {
+        fontFamily: 'Inter600',
+        fontSize: 24,
+        lineHeight: 29,
+        color: COLORS.mainBlack
+    },
+    greyAuthSmallText: {
+        fontFamily: 'Inter400',
+        fontSize: 14,
+        lineHeight: 17,
+        color: COLORS.textGrey
+    },
+    navAuthSmallText: {
+        fontFamily: 'Inter600',
+        fontSize: 14,
+        lineHeight: 17,
+        color: COLORS.mainContrast
+    },
+    authButtonText: {
+        fontFamily: 'Inter600',
+        fontSize: 16,
+        lineHeight: 21,
+        color: COLORS.white,
+        textAlign: 'center'
+    }
+})
 
 export const globalStyles = StyleSheet.create({
     pressed: {
@@ -48,18 +90,18 @@ export const globalStyles = StyleSheet.create({
     },
     textHuge: {
         fontFamily: 'Inter600',
-        fontSize: 22,
+        fontSize: 24,
         lineHeight: 36,
         color: COLORS.mainBlack
     },
     textExtraHuge: {
         fontFamily: 'Inter700',
-        fontSize: 24,
+        fontSize: 26,
         lineHeight: 40
     },
     textMonster: {
         fontFamily: 'Inter800',
-        fontSize: 26,
+        fontSize: 28,
         lineHeight: 44
     },
     textGiant: {

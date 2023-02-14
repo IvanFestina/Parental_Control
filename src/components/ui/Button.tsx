@@ -1,6 +1,6 @@
 import React from 'react';
 import {Pressable, View, StyleSheet, Text} from "react-native";
-import {COLORS, globalStyles} from "../../const/GlobalStyles";
+import {COLORS, globalStyles, modelStyles} from "../../const/GlobalStyles";
 
 type ButtonPropsType = {
     title: string
@@ -37,7 +37,7 @@ export const Button = ({
                     <Text>Loading</Text>
                     :
                     <Text
-                        style={[globalStyles.textMedium, s.buttonText, outline && {color: COLORS.secContrast}, disabled && {color: COLORS.white}, style]}>
+                        style={[s.buttonText, outline && {color: COLORS.secContrast}, disabled && {color: COLORS.white}, style]}>
                         {title}
                     </Text>
             }
@@ -53,11 +53,10 @@ const s = StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 16,
         borderRadius: 8,
-        elevation: 2,
+        elevation: 1,
     },
     buttonText: {
-        color: 'white',
-        textAlign: 'center'
+        ...modelStyles.authButtonText,
     }
 
 })

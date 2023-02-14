@@ -6,7 +6,7 @@ import {RegistrationScreen} from "./screens/1-auth/RegistrationScreen";
 import {LoginScreen} from "./screens/1-auth/LoginScreen";
 import {TabNavigator} from "./screens/TabNavigator";
 import {COLORS} from "./const/GlobalStyles";
-import {GreetingsScreen} from "./screens/1-auth/GreetingsScreen";
+import {WelcomeScreen} from "./screens/1-auth/WelcomeScreen";
 import {ColorValue} from "react-native/Libraries/StyleSheet/StyleSheet";
 
 
@@ -42,13 +42,17 @@ export const MainNavigator = () => {
                     <Stack.Group
                         screenOptions={{
                             headerShown: false, contentStyle: {
-                            backgroundColor: COLORS.mainContrast
-                        }
-                    }}>
-                        <Stack.Screen name={'Greetings'} component={GreetingsScreen}/>
+                                backgroundColor: COLORS.mainContrast
+                            }
+                        }}>
+                        <Stack.Screen name={'Greetings'} component={WelcomeScreen}
+                                      options={{animation: "slide_from_right"}}
+                        />
                         <Stack.Screen name='Login' component={LoginScreen}
+                                      options={{animation: "slide_from_right"}}
                         />
                         <Stack.Screen name="Registration"
+                                      options={{animation: "slide_from_right"}}
                                       component={RegistrationScreen}/>
                     </Stack.Group>
                 )}

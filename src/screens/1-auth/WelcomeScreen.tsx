@@ -1,12 +1,12 @@
 import {SafeAreaView} from "react-native-safe-area-context";
 import {StatusBar, StyleSheet, Text, View} from "react-native";
-import {COLORS, globalStyles} from "../../const/GlobalStyles";
+import {COLORS, globalStyles, modelStyles} from "../../const/GlobalStyles";
 import {useAppNavigation} from "../../typesNavigation";
 import {useAppDispatch, useAppSelector} from "../../utils/hooks_and_functions";
 import {HEIGHT, SPACING, WIDTH} from "../../const/Layout";
 import {Button} from "../../components/ui/Button";
 
-export const GreetingsScreen = () => {
+export const WelcomeScreen = () => {
 
     const navigation = useAppNavigation()
     const dispatch = useAppDispatch()
@@ -22,13 +22,15 @@ export const GreetingsScreen = () => {
                 <View style={s.contentContainer}>
                     {/*GreetingsText*/}
                     <View style={s.textBlock}>
-                        <Text style={s.header}>Здравствуйте</Text>
-                        <Text>Кто будет пользоваться этим телефоном?</Text>
+                        <Text style={modelStyles.titleAuth}>Здравствуйте</Text>
+                        <Text style={s.question}>Кто будет пользоваться этим телефоном?</Text>
                     </View>
                     {/*Buttons*/}
                     <View style={s.buttonsBlock}>
-                        <Button title={'Родитель'} onPress={onButtonParentHandle} style={{fontFamily: 'Inter500'}}/>
-                        <Button title={'Ребенок'} onPress={onButtonParentHandle} style={{fontFamily: 'Inter500'}}/>
+                        <Button title={'Родитель'} onPress={onButtonParentHandle}
+                                style={{fontFamily: 'Inter500'}}/>
+                        <Button title={'Ребенок'} onPress={onButtonParentHandle}
+                                style={{fontFamily: 'Inter500'}}/>
                     </View>
                 </View>
 
@@ -62,12 +64,10 @@ const s = StyleSheet.create({
         alignItems: 'center',
         gap: SPACING
     },
-    header: {
-        ...globalStyles.textHuge
-    },
     question: {
         ...globalStyles.textMedium,
         color: COLORS.textGrey,
+        textAlign: 'center'
     },
     buttonsBlock: {
         gap: SPACING
