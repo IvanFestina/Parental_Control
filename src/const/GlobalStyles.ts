@@ -1,5 +1,4 @@
 import {StyleSheet} from "react-native";
-import {SPACING} from "./Layout";
 
 export const COLORS = {
     white: '#fff',
@@ -13,22 +12,41 @@ export const COLORS = {
     textBlue: '#4C6C91',
     mainBlue: '#3378FE',
     mainBlack: '#1B1B1B',
+    iconBlack: '#1E1E1E',
     mainBackground: '#F5F5F5'
 }
 
 export const rareStyles = StyleSheet.create({
-    label: {
+    tabTitle: {
+        fontFamily: 'Inter400',
+        fontSize: 10,
+        lineHeight: 12,
+        color: COLORS.mainBlack
+    },
+    labelGrey: {
         fontFamily: 'Inter400',
         fontSize: 14,
         lineHeight: 17,
         color: COLORS.textGrey
     },
-    inputText: {
+    smallButtonText: {
+        fontFamily: 'Inter400',
+        fontSize: 14,
+        lineHeight: 17,
+        color: COLORS.white
+    },
+    childName: {
+        fontFamily: 'Inter400',
+        fontSize: 16,
+        lineHeight: 20,
+        color: COLORS.mainBlack
+    },
+    semiBoldText: {
         fontFamily: 'Inter600',
         fontSize: 16,
         lineHeight: 20,
         color: COLORS.mainBlack
-    }
+    },
 })
 
 export const modelStyles = StyleSheet.create({

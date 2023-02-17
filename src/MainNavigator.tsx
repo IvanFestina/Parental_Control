@@ -4,10 +4,9 @@ import {View} from "react-native";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {RegistrationScreen} from "./screens/1-auth/RegistrationScreen";
 import {LoginScreen} from "./screens/1-auth/LoginScreen";
-import {TabNavigator} from "./screens/TabNavigator";
+import {TabNavigator} from "./screens/2-mainScreens/TabNavigator";
 import {COLORS} from "./const/GlobalStyles";
 import {WelcomeScreen} from "./screens/1-auth/WelcomeScreen";
-import {ColorValue} from "react-native/Libraries/StyleSheet/StyleSheet";
 
 
 export const MainNavigator = () => {

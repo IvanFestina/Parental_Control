@@ -1,8 +1,8 @@
-import {useAppNavigation} from "../typesNavigation";
+import {useAppNavigation} from "../../../typesNavigation";
 import {Pressable, StyleSheet, View} from "react-native";
-import {COLORS, globalStyles} from "../const/GlobalStyles";
-import ArrowBackSvg from "../../assets/icons/ArrowBackSvg";
-import {BASE_HITSLOP, SPACING} from "../const/Layout";
+import {COLORS, globalStyles} from "../../../const/GlobalStyles";
+import ArrowBackSvg from "../../../../assets/icons/ArrowBackSvg";
+import {BASE_HITSLOP, SPACING} from "../../../const/Layout";
 import Animated, {
     useAnimatedStyle,
     useSharedValue,

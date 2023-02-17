@@ -1,7 +1,7 @@
 import {Pressable, StyleSheet, Text} from "react-native";
-import {COLORS, globalStyles, modelStyles} from "../../const/GlobalStyles";
+import {COLORS, globalStyles, modelStyles} from "../../../const/GlobalStyles";
 import React, {Children} from "react";
-import {BASE_HITSLOP} from "../../const/Layout";
+import {BASE_HITSLOP} from "../../../const/Layout";
 
 type TextNavigationPropsType = {
     style?: any
@@ -27,6 +27,6 @@ export const TextNavigation = ({children, style, onPress}: TextNavigationPropsTy
 
 export const s = StyleSheet.create({
     text: {
-        ...modelStyles.navAuthSmallText
+        ...modelStyles.navAuthSmallText,
     }
 })

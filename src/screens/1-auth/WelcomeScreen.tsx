@@ -4,7 +4,8 @@ import {COLORS, globalStyles, modelStyles} from "../../const/GlobalStyles";
 import {useAppNavigation} from "../../typesNavigation";
 import {useAppDispatch, useAppSelector} from "../../utils/hooks_and_functions";
 import {HEIGHT, SPACING, WIDTH} from "../../const/Layout";
-import {Button} from "../../components/ui/Button";
+import {Button} from "./components/Button";
+import Logo from '../../../assets/icons/lock.svg'
 
 export const WelcomeScreen = () => {
 
@@ -18,12 +19,18 @@ export const WelcomeScreen = () => {
     return (
         <SafeAreaView style={s.container}>
             <StatusBar backgroundColor={COLORS.mainContrast}/>
+            <View style={s.iconBlock}>
+                <View style={s.logoContainer}>
+                    <Logo width={90} height={90} fill={COLORS.white}/>
+                </View>
+            </View>
             <View style={s.overContainer}>
                 <View style={s.contentContainer}>
                     {/*GreetingsText*/}
                     <View style={s.textBlock}>
                         <Text style={modelStyles.titleAuth}>Здравствуйте</Text>
-                        <Text style={s.question}>Кто будет пользоваться этим телефоном?</Text>
+                        <Text style={s.question}>Кто будет пользоваться этим
+                            телефоном?</Text>
                     </View>
                     {/*Buttons*/}
                     <View style={s.buttonsBlock}>
@@ -44,6 +51,12 @@ const s = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'flex-end',
+    },
+    iconBlock: {flex: 1},
+    logoContainer: {
+        position: "absolute",
+        alignSelf: 'center',
+        top: 70
     },
     overContainer: {
         borderTopLeftRadius: 16,

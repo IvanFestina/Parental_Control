@@ -2,26 +2,28 @@ import {useAppNavigation} from "../../typesNavigation";
 import {useAppDispatch, useAppSelector} from "../../utils/hooks_and_functions";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {
-    View,
-    Text,
-    StyleSheet,
-    StatusBar,
     Alert,
-    KeyboardAvoidingView, Pressable, Keyboard, TouchableWithoutFeedback
+    Keyboard,
+    KeyboardAvoidingView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    TouchableWithoutFeedback,
+    View
 } from "react-native";
-import {Button} from "../../components/ui/Button";
+import {Button} from "./components/Button";
 import {COLORS, globalStyles, modelStyles} from "../../const/GlobalStyles";
-import {BASE_WIDTH, HEIGHT, SPACING, WIDTH} from "../../const/Layout";
-import {InputForm} from "../../components/ui/InputForm";
-import {SubmitHandler, useForm} from 'react-hook-form';
+import {HEIGHT, SPACING, WIDTH} from "../../const/Layout";
+import {InputForm} from "./components/InputForm";
+import {Controller, SubmitHandler, useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import {TextNavigation} from "../../components/ui/TextNavigation";
-import ArrowBackSvg from "../../../assets/icons/ArrowBackSvg";
-import {AnimatedBackButton} from "../../components/AnimatedBackButton";
+import {TextNavigation} from "./components/TextNavigation";
+import {AnimatedBackButton} from "./components/AnimatedBackButton";
+import {setIsLoggedIn} from "../../bll/slices/authSlice";
 
 const schema = z.object({
-    login: z.string().min(3, {message: 'Необходимо 3 и более символов'}).max(25, {message: 'Не больше 25 символов'}).email(),
+    login: z.string().min(3, {message: 'Необходимо 3 и более символов'}).max(25, {message: 'Не больше 25 символов'}),
     password: z.string().min(6, {message: 'Required'})
 });
 
@@ -38,6 +40,10 @@ export const LoginScreen = () => {
         setValue,
         formState: {errors},
     } = useForm<LoginFormType>({
+        defaultValues: {
+            email: '',
+            password: ''
+        },
         mode: "onBlur",
         resolver: zodResolver(schema),
     });
@@ -47,11 +53,11 @@ export const LoginScreen = () => {
     const dispatch = useAppDispatch()
     const isLoading = useAppSelector(state => state.app.isLoading)
 
+
     const onSubmit: SubmitHandler<LoginFormType> = (data) => {
         Alert.alert(JSON.stringify(data))
-        console.log(data);
-        navigation.navigate('TabNavigator', {screen: 'Home'})
-    };
+        dispatch(setIsLoggedIn(true))
+ };
 
     const toRegistrationHandle = () => {
         navigation.navigate('Registration')
@@ -69,30 +75,53 @@ export const LoginScreen = () => {
                     {/*Форма*/}
                     <KeyboardAvoidingView style={s.formBlock}>
                         <Text style={modelStyles.titleAuth}>Войти</Text>
-
-                        <InputForm name={'email'} control={control} label={'Email'}
-                                   errors={errors} placeholder={'Ваша почта'}/>
-                        <InputForm name={'password'} control={control} label={'Password'}
-                                   errors={errors} placeholder={'Пароль'}/>
+                        <Controller name={'email'} control={control}
+                                    render={
+                                        ({field: {onChange, onBlur, value}}) => (
+                                            <InputForm
+                                                name={'email'}
+                                                onBlur={onBlur}
+                                                onChangeText={onChange}
+                                                value={value}
+                                                label={'Email'}
+                                                errors={errors}
+                                                placeholder={'Ваша почта'}
+                                            />
+                                        )
+                                    }/>
+                        <Controller name={'password'} control={control}
+                                    render={
+                                        ({field: {onChange, onBlur, value}}) => (
+                                            <InputForm
+                                                name={'password'}
+                                                onBlur={onBlur}
+                                                onChangeText={onChange}
+                                                value={value}
+                                                label={'Password'}
+                                                errors={errors}
+                                                placeholder={'Пароль'}
+                                            />
+                                        )
+                                    }/>
                         <TextNavigation style={{alignSelf: 'flex-end'}} onPress={() => {
                         }}>
                             Забыли пароль
                         </TextNavigation>
                     </KeyboardAvoidingView>
                     {/*Кнопка*/}
+
                     <View style={s.submitBlock}>
-
                         <Button title={'Войти'}
-                                onPress={handleSubmit(onSubmit)}/>
+                                onPress={() => dispatch(setIsLoggedIn(true))}/>
 
-                        <View style={{alignItems: 'center', justifyContent: 'center',}}>
+                        <View style={s.footerText}>
                             <Text style={modelStyles.greyAuthSmallText}>
                                 У меня еще нет
                                 аккаунта
-                                <TextNavigation onPress={toRegistrationHandle}>
-                                    Зарегистрироваться
-                                </TextNavigation>
                             </Text>
+                            <TextNavigation onPress={toRegistrationHandle}>
+                                Зарегистрироваться
+                            </TextNavigation>
                         </View>
                     </View>
                 </View>
@@ -133,6 +162,13 @@ const s = StyleSheet.create({
     submitBlock: {
         paddingHorizontal: SPACING,
         justifyContent: "center",
-        alignItems: 'stretch'
+        alignItems: 'stretch',
+        gap: SPACING * 1.5
     },
+    footerText: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        gap: 5
+    }
 })

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Pressable, View, StyleSheet, Text} from "react-native";
-import {COLORS, globalStyles, modelStyles} from "../../const/GlobalStyles";
+import {COLORS, globalStyles, modelStyles} from "../../../const/GlobalStyles";
 
 type ButtonPropsType = {
     title: string

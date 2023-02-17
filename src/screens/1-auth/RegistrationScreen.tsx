@@ -1,5 +1,6 @@
 import {SafeAreaView} from "react-native-safe-area-context";
 import {
+    Alert,
     Keyboard,
     KeyboardAvoidingView,
     StatusBar,
@@ -11,17 +12,19 @@ import {COLORS, modelStyles} from "../../const/GlobalStyles";
 import {useAppNavigation} from "../../typesNavigation";
 import {useAppDispatch, useAppSelector} from "../../utils/hooks_and_functions";
 import {HEIGHT, SPACING, WIDTH} from "../../const/Layout";
-import {InputForm} from "../../components/ui/InputForm";
-import {Button} from "../../components/ui/Button";
+import {InputForm} from "./components/InputForm";
+import {Button} from "./components/Button";
 import {zodResolver} from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import {SubmitHandler, useForm} from "react-hook-form";
-import {AnimatedBackButton} from "../../components/AnimatedBackButton";
-import {TextNavigation} from "../../components/ui/TextNavigation";
+import {Controller, SubmitHandler, useForm} from "react-hook-form";
+import {AnimatedBackButton} from "./components/AnimatedBackButton";
+import {TextNavigation} from "./components/TextNavigation";
 
 const schema = z.object({
     login: z.string().min(3, {message: 'Необходимо 3 и более символов'}).max(25, {message: 'Не больше 25 символов'}).email(),
-    password: z.string().min(6, {message: 'Required'})
+    password: z.string().min(6, {message: 'Required'}),
+    passwordRepeat: z.string().min(6, {message: 'Required'})
+
 });
 
 type RegistrationFormType = {
@@ -48,6 +51,7 @@ export const RegistrationScreen = () => {
 
     const onSubmit: SubmitHandler<RegistrationFormType> = (data) => {
         console.log(data);
+        Alert.alert(JSON.stringify(data))
     };
     const toLoginHandle = () => {
         navigation.navigate('Login')
@@ -63,27 +67,63 @@ export const RegistrationScreen = () => {
                     {/*Форма*/}
                     <KeyboardAvoidingView style={s.formBlock}>
                         <Text style={modelStyles.titleAuth}>Зарегистрироваться</Text>
-                        <InputForm name={'email'} control={control} label={'email'}
-                                   errors={errors} placeholder={'Ваша почта'}/>
-                        <InputForm name={'password'} control={control} label={'Пароль'}
-                                   errors={errors} placeholder={'Password'}/>
-                        <InputForm name={'passwordRepeat'} control={control}
-                                   label={'Confirm Password'} errors={errors}
-                                   placeholder={'Повторите пароль'}/>
+                        <Controller name={'email'} control={control}
+                                    render={
+                                        ({field: {onChange, onBlur, value}}) => (
+                                            <InputForm
+                                                name={'email'}
+                                                onBlur={onBlur}
+                                                onChangeText={onChange}
+                                                value={value}
+                                                label={'Email'}
+                                                errors={errors}
+                                                placeholder={'Ваша почта'}
+                                            />
+                                        )
+                                    }/>
+                        <Controller name={'password'} control={control}
+                                    render={
+                                        ({field: {onChange, onBlur, value}}) => (
+                                            <InputForm
+                                                name={'password'}
+                                                onBlur={onBlur}
+                                                onChangeText={onChange}
+                                                value={value}
+                                                label={'Password'}
+                                                errors={errors}
+                                                placeholder={'Пароль'}
+                                            />
+                                        )
+                                    }/>
+                        <Controller name={'passwordRepeat'} control={control}
+                                    render={
+                                        ({field: {onChange, onBlur, value}}) => (
+                                            <InputForm
+                                                name={'passwordRepeat'}
+                                                onBlur={onBlur}
+                                                onChangeText={onChange}
+                                                value={value}
+                                                label={'Confirm Password'}
+                                                errors={errors}
+                                                placeholder={'Пароль'}
+                                            />
+                                        )
+                                    }/>
                     </KeyboardAvoidingView>
                     <View style={s.submitBlock}>
 
-                        <Button title={'Войти'}
+                        <Button title={'Зарегистрироваться'}
                                 onPress={handleSubmit(onSubmit)}/>
 
-                        <View style={{alignItems: 'center', justifyContent: 'center',}}>
-
-                            <Text style={modelStyles.greyAuthSmallText}>
-                                У меня уже есть аккаунт
-                                <TextNavigation onPress={toLoginHandle}>
-                                    Аккаунт
-                                </TextNavigation>
+                        <View style={s.footerText}>
+                            <Text
+                                style={[modelStyles.greyAuthSmallText, {textAlign: 'center'}]}>
+                                У меня уже есть
                             </Text>
+                            <TextNavigation onPress={toLoginHandle}>
+                                Аккаунт
+                            </TextNavigation>
+
                         </View>
                     </View>
                 </View>
@@ -114,6 +154,13 @@ const s = StyleSheet.create({
     submitBlock: {
         paddingHorizontal: SPACING,
         justifyContent: "center",
-        alignItems: 'stretch'
+        alignItems: 'stretch',
+        gap: SPACING * 1.5
     },
+    footerText: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        gap: 5
+    }
 })

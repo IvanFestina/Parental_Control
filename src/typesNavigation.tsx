@@ -13,7 +13,7 @@ export type RootStackParamList = {
 
 export type RootTabParamList = {
     Home: undefined
-    Homework: undefined
+    Tasks: undefined
     Statistics: undefined
     Apps: undefined
     Other: undefined
