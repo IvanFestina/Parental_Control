@@ -1,13 +1,13 @@
 import {configureStore} from "@reduxjs/toolkit";
 import {appReducer} from "./slices/appSlice";
 import {authReducer} from "./slices/authSlice";
-import {ordersReducer} from "./slices/ordersSlice";
+import {learningProcessReducer} from "./slices/learningProcessSlice";
 
 export const store = configureStore({
     reducer: {
         auth: authReducer,
         app: appReducer,
-        orders: ordersReducer
+        learningProcess: learningProcessReducer
     },
 });
 

@@ -1,6 +1,6 @@
 import {StatusBar, StyleSheet, View} from "react-native";
-import {COLORS} from "../../../const/GlobalStyles";
-import Home from "../../../../assets/icons/lock.svg";
+import {COLORS} from "../../../../const/GlobalStyles";
+import Home from "../../../../../assets/icons/lock.svg";
 import Animated from "react-native-reanimated";
 import {SafeAreaView} from "react-native-safe-area-context";
 

@@ -4,62 +4,36 @@ import {useController} from "react-hook-form";
 import MailSVG from "../../../../assets/icons/mail";
 import {SPACING, WIDTH} from "../../../const/Layout";
 import PasswordSVG from "../../../../assets/icons/password";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 type InputPropsType = {
-    name: string
-    onChangeText: (...event: any[]) => void
-    label: string
+    onChangeText: (value: string) => void
     value: string
-    errors: any
-    placeholder: string
-    onBlur: () => void
 }
 
-export const InputForm = ({
-                              name,
-                              errors,
-                              label,
+export const InputSearch = ({
+                              
                               value,
-                              placeholder,
                               onChangeText,
                               ...inputProps
                           }: InputPropsType) => {
-
-
-    const returnSvgIcon = (name: string) => {
-        switch (name) {
-            case 'email':
-                return <MailSVG/>
-            case 'password':
-            case 'passwordRepeat':
-                return <PasswordSVG/>
-            default:
-                return
-        }
-    }
+    
 
     return (
         <View style={s.container}>
             {/*Icon*/}
             <View style={s.iconContainer}>
-                {returnSvgIcon(name)}
+                <Ionicons name={'search'} size={30}/>
             </View>
-            {/*Label / Input*/}
-            <View style={s.label_input}>
-                {label && <Text style={specificStyles.smallGreyText}>{label}</Text>}
+            {/*Input*/}
                 <TextInput autoCorrect={false}
                            cursorColor={COLORS.mainBlack}
                            style={s.input}
                            value={value}
-                           keyboardType={name === 'email' ? 'email-address' : 'default'}
-                           secureTextEntry={name === 'password'}
                            onChangeText={onChangeText}
-                           placeholder={placeholder}
+                           placeholder={'Найти'}
                            placeholderTextColor={COLORS.textGrey}
                            {...inputProps}/>
-                {errors[name] && <Text style={s.error}>{errors[name].message}</Text>}
-            </View>
-
         </View>
     )
 }
@@ -74,7 +48,6 @@ const s = StyleSheet.create({
     iconContainer: {
         padding: SPACING / 2
     },
-    label_input: {paddingVertical: 15,},
     input: {
         width: WIDTH / 1.5,
         ...specificStyles.semiBoldText,

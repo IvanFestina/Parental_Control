@@ -1,7 +1,7 @@
 import {Pressable, TextInput, View} from "react-native";
 import {useState} from "react";
-import Pen from '../../../../assets/icons/Pen.svg'
-import {globalStyles} from "../../../const/GlobalStyles";
+import Pen from '../../../../../assets/icons/Pen.svg'
+import {globalStyles} from "../../../../const/GlobalStyles";
 
 export const EditInput = () => {
 

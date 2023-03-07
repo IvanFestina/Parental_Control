@@ -1,10 +1,10 @@
 import {useAppDispatch} from "../../../utils/hooks_and_functions";
 import {StyleSheet, Text, View} from "react-native";
-import {COLORS, rareStyles} from "../../../const/GlobalStyles";
+import {COLORS, specificStyles} from "../../../const/GlobalStyles";
 import {SPACING} from "../../../const/Layout";
 import React from "react";
-import {Avatar} from "./Avatar";
-import {EditInput} from "./EditInput";
+import {Avatar} from "./UI/Avatar";
+import {EditInput} from "./UI/EditInput";
 
 export const Header = () => {
 
@@ -17,7 +17,7 @@ export const Header = () => {
                 <Avatar/>
                 {/*Name*/}
                 <View style={{marginRight: 50}}>
-                    <Text style={rareStyles.childName}>Константин</Text>
+                    <Text style={specificStyles.childName}>Константин</Text>
                 </View>
             </View>
             {/*EditButton*/}

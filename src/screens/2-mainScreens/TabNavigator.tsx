@@ -5,13 +5,13 @@ import {TasksScreen} from "./2-TasksScreen";
 import {StatisticsScreen} from "./3-StatisticsScreen";
 import {AppsScreen} from "./4-AppsScreen";
 import {OtherScreen} from "./5-OtherScreen";
-import {COLORS, rareStyles} from "../../const/GlobalStyles";
+import {COLORS, specificStyles} from "../../const/GlobalStyles";
 import Stats from "../../../assets/icons/Stats.svg";
 import Apps from "../../../assets/icons/Apps.svg";
 import Other from "../../../assets/icons/Other.svg";
 import Tasks from "../../../assets/icons/Tasks.svg"
 import {StyleSheet} from "react-native";
-import {CustomTabBarButton} from "./components/CustomTabBarButton";
+import {CustomTabBarButton} from "./components/UI/CustomTabBarButton";
 
 
 export const TabNavigator = () => {
@@ -21,7 +21,7 @@ export const TabNavigator = () => {
     return (
         <Tab.Navigator initialRouteName={'Home'} screenOptions={{
             headerShown: false,
-            tabBarLabelStyle: rareStyles.tabTitle,
+            tabBarLabelStyle: specificStyles.tabTitle,
             tabBarStyle: s.tabBarStyle,
         }}>
 
@@ -68,5 +68,6 @@ export const s = StyleSheet.create({
         backgroundColor: COLORS.white,
         position: 'absolute',
         borderTopWidth: 0,
-    }
+    },
+
 })

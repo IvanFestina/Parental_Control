@@ -16,24 +16,36 @@ export const COLORS = {
     mainBackground: '#F5F5F5'
 }
 
-export const rareStyles = StyleSheet.create({
+export const specificStyles = StyleSheet.create({
     tabTitle: {
         fontFamily: 'Inter400',
         fontSize: 10,
         lineHeight: 12,
         color: COLORS.mainBlack
     },
-    labelGrey: {
+    smallGreyText: {
         fontFamily: 'Inter400',
         fontSize: 14,
         lineHeight: 17,
         color: COLORS.textGrey
     },
-    smallButtonText: {
+    smallWhiteText: {
         fontFamily: 'Inter400',
         fontSize: 14,
         lineHeight: 17,
         color: COLORS.white
+    },
+    smallBlackText: {
+        fontFamily: 'Inter400',
+        fontSize: 14,
+        lineHeight: 17,
+        color: COLORS.mainBlack
+    },
+    taskText: {
+        fontFamily: 'Inter400',
+        fontSize: 14,
+        lineHeight: 18,
+        color: COLORS.mainBlack
     },
     childName: {
         fontFamily: 'Inter400',
@@ -47,6 +59,12 @@ export const rareStyles = StyleSheet.create({
         lineHeight: 20,
         color: COLORS.mainBlack
     },
+    semiBoldWhiteText: {
+        fontFamily: 'Inter600',
+        fontSize: 20,
+        lineHeight: 24,
+        color: COLORS.white
+    }
 })
 
 export const modelStyles = StyleSheet.create({

@@ -1,38 +1,58 @@
-import {useAppDispatch} from "../../../utils/hooks_and_functions";
+import {useAppDispatch, useAppSelector} from "../../../utils/hooks_and_functions";
 import {StyleSheet, Text, View} from "react-native";
-import {COLORS, rareStyles} from "../../../const/GlobalStyles";
+import {COLORS, specificStyles} from "../../../const/GlobalStyles";
 import {SPACING, WIDTH} from "../../../const/Layout";
-import React from "react";
+import React, {useState} from "react";
 import {Button} from "../../1-auth/components/Button";
+import {RadioButton} from "./UI/RadioButton";
+import {Task} from "./UI/Task";
+import {WhiteContainer} from "./UI/WhiteContainer";
+
+const options = [
+    {title: 'Сегодня'},
+    {title: 'Вчера'},
+    {title: 'Неделя'},
+];
 
 export const Plan = () => {
 
+
+    const [userOption, setUserOption] = useState('Сегодня');
     const dispatch = useAppDispatch()
+    const tasks = useAppSelector(state => state.learningProcess.tasksData)
 
     return (
-        <View style={s.container}>
-            <Text style={rareStyles.semiBoldText}>План</Text>
-            {/*BATONS*/}
+        <WhiteContainer>
+            <Text style={specificStyles.semiBoldText}>План</Text>
+            {/* B U T T O N S */}
             <View style={s.buttonsRow}>
-                <Button title={"Сегодня"} />
-                <Button title={"Вчера"} />
-                <Button title={"Неделя"} />
+                {options.map(o => <RadioButton key={o.title} buttonTitle={o.title}
+                                               selectedTitle={userOption}
+                                               onSelect={() => setUserOption(o.title)}/>
+                )}
             </View>
-        </View>
+            <View style={s.listOfPlans}>
+                {
+                    tasks.map(t => {
+                        return <Task key={t.id} title={t.title} id={t.id}
+                                     isChecked={t.isChecked}/>
+                    })
+                }
+            </View>
+        </WhiteContainer>
 
     )
 }
 
 const s = StyleSheet.create({
-    container: {
-        padding: SPACING,
-        borderRadius: 15,
-        backgroundColor: COLORS.white
-    },
     buttonsRow: {
         flexDirection: 'row',
-        gap: SPACING,
-
+        gap: SPACING / 2,
+        marginTop: SPACING,
+    },
+    listOfPlans: {
+        marginTop: SPACING,
+        gap: 5,
     },
 
 })

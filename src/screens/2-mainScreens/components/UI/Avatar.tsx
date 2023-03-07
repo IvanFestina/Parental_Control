@@ -1,6 +1,6 @@
 import {StyleSheet, View} from "react-native";
-import {COLORS} from "../../../const/GlobalStyles";
-import AvatarSample from '../../../../assets/icons/smiling-face.svg'
+import {COLORS} from "../../../../const/GlobalStyles";
+import AvatarSample from '../../../../../assets/icons/smiling-face.svg'
 
 export const Avatar = () => {
 

@@ -16,7 +16,7 @@ public class MainApplication extends Application implements ReactApplication {
       new DefaultReactNativeHost(this) {
         @Override
         public boolean getUseDeveloperSupport() {
-          return BuildConfig.DEBUG;
+          return com.parental_control.BuildConfig.DEBUG;
         }
 
         @Override
@@ -24,7 +24,7 @@ public class MainApplication extends Application implements ReactApplication {
           @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
-          // packages.add(new MyReactNativePackage());
+          packages.add(new java.com.parental_control.MyAppPackage());
           return packages;
         }
 
@@ -35,12 +35,12 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected boolean isNewArchEnabled() {
-          return BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
+          return com.parental_control.BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
         }
 
         @Override
         protected Boolean isHermesEnabled() {
-          return BuildConfig.IS_HERMES_ENABLED;
+          return com.parental_control.BuildConfig.IS_HERMES_ENABLED;
         }
       };
 
@@ -53,7 +53,7 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
-    if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
+    if (com.parental_control.BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
       // If you opted-in for the New Architecture, we load the native entry point for this app.
       DefaultNewArchitectureEntryPoint.load();
     }
