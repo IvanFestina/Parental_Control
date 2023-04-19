@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pressable, View, StyleSheet, Text} from "react-native";
+import {Pressable, StyleSheet, Text} from "react-native";
 import {COLORS, globalStyles, modelStyles} from "../../../const/GlobalStyles";
 
 type ButtonPropsType = {
@@ -18,7 +18,6 @@ export const Button = ({
                            outline,
                            style,
                            isLoading,
-                           ...props
                        }: ButtonPropsType) => {
 
     // кнопка с анимацией загрузки (AnimatedLoader), которая меняет вертикальный паддинг (паддинг делает кнопку больше), если кнопка disabled - кнопка серая, если outline - кнопка белая с обводкой нужного цвета

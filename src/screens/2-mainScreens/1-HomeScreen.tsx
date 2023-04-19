@@ -1,6 +1,14 @@
 import {SafeAreaView} from "react-native-safe-area-context"
 import {useAppDispatch} from "../../utils/hooks_and_functions";
-import {Alert, Button, Linking, NativeModules, StatusBar, StyleSheet} from "react-native";
+import {
+    Alert,
+    Button,
+    Linking,
+    NativeModules,
+    ScrollView,
+    StatusBar,
+    StyleSheet
+} from "react-native";
 import {COLORS} from "../../const/GlobalStyles";
 import {SPACING} from "../../const/Layout";
 import React, {useCallback, useEffect} from "react";
@@ -12,7 +20,7 @@ import {getPhoneApps} from "../../bll/slices/learningProcessSlice";
 
 export const HomeScreen = () => {
 
-    const {ParentalControlModule, CalendarModule} = NativeModules;
+    const {ParentalControlModule} = NativeModules;
     const dispatch = useAppDispatch()
 
 
@@ -35,14 +43,17 @@ export const HomeScreen = () => {
 
 
     return (
-        <SafeAreaView style={s.container}>
+        <SafeAreaView>
             <StatusBar backgroundColor={COLORS.mainBackground}/>
-            <Header/>
-            <Plan/>
-            <AvailableAndSpentTime/>
-            <SendIntentButton
-                action={"android.settings.USAGE_ACCESS_SETTINGS"}
-            >Access Usage Settings</SendIntentButton>
+            <ScrollView contentContainerStyle={s.container}>
+                <Header/>
+                <Plan/>
+                <AvailableAndSpentTime/>
+                <SendIntentButton
+                    action={"android.settings.USAGE_ACCESS_SETTINGS"}
+                >Access Usage Settings
+                </SendIntentButton>
+            </ScrollView>
         </SafeAreaView>
     )
 }

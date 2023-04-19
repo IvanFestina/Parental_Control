@@ -1,6 +1,6 @@
 import {SafeAreaView} from "react-native-safe-area-context"
 import {useAppDispatch} from "../../utils/hooks_and_functions";
-import {StatusBar, StyleSheet, Text, View} from "react-native";
+import {StatusBar, StyleSheet} from "react-native";
 import {COLORS} from "../../const/GlobalStyles";
 import React from "react";
 import {Header} from "./components/Header";

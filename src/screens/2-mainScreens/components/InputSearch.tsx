@@ -1,9 +1,6 @@
-import {StyleSheet, Text, TextInput, View} from "react-native";
+import {StyleSheet, TextInput, View} from "react-native";
 import {COLORS, specificStyles} from "../../../const/GlobalStyles";
-import {useController} from "react-hook-form";
-import MailSVG from "../../../../assets/icons/mail";
 import {SPACING, WIDTH} from "../../../const/Layout";
-import PasswordSVG from "../../../../assets/icons/password";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 type InputPropsType = {
