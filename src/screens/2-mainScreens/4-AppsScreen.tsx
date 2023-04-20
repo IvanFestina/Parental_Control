@@ -1,17 +1,6 @@
 import {SafeAreaView} from "react-native-safe-area-context"
-import {
-    msToMinutes,
-    useAppDispatch,
-    useAppSelector
-} from "../../utils/hooks_and_functions";
-import {
-    FlatList,
-    ListRenderItem, RefreshControl,
-    RefreshControlComponent,
-    StatusBar,
-    StyleSheet, Text, TextInput,
-    View
-} from "react-native";
+import {useAppDispatch, useAppSelector} from "../../utils/hooks_and_functions";
+import {FlatList, ListRenderItem, RefreshControl, StatusBar, StyleSheet, Text, View} from "react-native";
 import {COLORS, globalStyles, specificStyles} from "../../const/GlobalStyles";
 import {Header} from "./components/Header";
 import React, {useState} from "react";
@@ -27,7 +16,7 @@ export const AppsScreen = () => {
 
     const dispatch = useAppDispatch()
 
-    const appUsage = useAppSelector(state => state.learningProcess.appUsage).filter(item => msToMinutes(+item.timeUsed) > 0).sort((a, b) => msToMinutes(+a.timeUsed) - msToMinutes(+b.timeUsed)).reverse()
+    const appUsage = [] as appItem[]
     const isLoading = useAppSelector(state => state.app.isLoading)
 
     const renderAppItem: ListRenderItem<appItem> = ({item, index, separators}) => {
